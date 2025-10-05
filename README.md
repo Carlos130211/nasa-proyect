@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+NASA Space Apps Challenge 2025
 
-## Getting Started
+¿Lloverá en mi evento?
 
-First, run the development server:
+Aplicación web que estima, con datos históricos de la NASA, la probabilidad de que en una ubicación y fecha determinadas se presenten condiciones muy calurosas, muy frías, muy ventosas, muy húmedas/lluviosas o muy incómodas.
+Está diseñada para ayudar a planificar actividades al aire libre de forma más informada y confiable.
 
-```bash
+Stack
+
+Next.js
+ (App Router)
+
+TypeScript
+
+React
+
+Tailwind CSS
+
+(Opcional) Recharts / D3.js / ECharts para visualización
+
+📂 Estructura del Proyecto
+src/
+└─ app/
+   └─ components/
+      └─ (public)/
+         ├─ Navbar.tsx          # Barra de navegación (Inicio, Recursos usados, Integrantes, Demo)
+         └─ Home/
+            └─ index.tsx       # Página principal con secciones controladas por el Navbar
+   └─ page.tsx                 # Punto de entrada que monta HomeIndex
+
+Paleta de Colores
+
+Azul NASA #0B3D91
+
+Rojo NASA #FC3D21
+
+Cielo #BBD5F0
+
+Pizarra #0f172a
+
+Secciones
+
+Inicio: Resumen, objetivos y checklist rápido.
+
+Recursos usados: Fuentes de datos NASA y stack de visualización.
+
+Integrantes: Roles del equipo y estado del reto.
+
+Demo: Flujo técnico sugerido y alcance.
+
+🛠️ Instalación y Ejecución
+
+Instala las dependencias:
+
+npm install
+# o
+yarn
+# o
+pnpm install
+# o
+bun install
+
+
+Ejecuta el servidor de desarrollo:
+
 npm run dev
-# or
+# o
 yarn dev
-# or
+# o
 pnpm dev
-# or
+# o
 bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visita http://localhost:3000
+ en tu navegador para ver la app.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🧰 Scripts útiles
+npm run dev        # Modo desarrollo
+npm run build      # Compilación para producción
+npm run start      # Ejecutar build en producción
+npm run lint       # Linter
 
-## Learn More
+🌐 Integración de Datos
 
-To learn more about Next.js, take a look at the following resources:
+Definir fuentes (catálogos NASA: precipitación, temperatura, viento, etc.)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Aplicar subsetting (rango espacial y temporal)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Calcular probabilidades de excedencia de umbrales
 
-## Deploy on Vercel
+Visualizar distribuciones y series temporales
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Exportar resultados en CSV/JSON con metadatos
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Puedes usar un .env.local para variables públicas:
+
+NEXT_PUBLIC_API_BASE_URL=...
+NEXT_PUBLIC_MAP_TOKEN=...
+
+💻 Flujo de la Demo
+
+El usuario selecciona ubicación y fecha
+
+Se calcula la probabilidad de eventos climatológicos según históricos NASA
+
+Se muestran indicadores visuales y se permite la descarga de datos
+
+🌍 Deploy en Vercel
+
+La forma más sencilla de desplegar es con Vercel
+:
+
+Conecta el repositorio
+
+Configura variables de entorno si aplica
+
+Haz deploy desde la rama main
+
+Documentación oficial: Deploy Next.js
+
+📝 Roadmap
+
+ Selector de ubicación en mapa
+
+ Integración con APIs reales de NASA
+
+ Cálculo de probabilidades
+
+ Visualizaciones dinámicas
+
+ Exportación de datos con metadatos
+
+ Optimización para producción y accesibilidad
+
+👥 Créditos
+
+Proyecto desarrollado para NASA Space Apps Challenge 2025.
+Equipo multidisciplinario: Datos, Frontend, Backend, Ciencia de Datos y PM.

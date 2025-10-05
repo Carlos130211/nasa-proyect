@@ -1,8 +1,5 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Navbar, { type NavbarTabKey } from "../Navbar";
-
 const meta = {
   proyecto: "NASA Space Apps Challenge 2025",
   reto: "¿Lloverá en mi evento? (Will It Rain On My Parade?)",
@@ -20,58 +17,102 @@ const meta = {
 
 const copy = {
   resumen:
-    "Construye una app con interfaz personalizada que use datos históricos de NASA para estimar la probabilidad de condiciones muy calurosas, muy frías, muy ventosas, muy húmedas/lluviosas o muy incómodas para un lugar y fecha específicos.",
-  contexto:
-    "Las probabilidades se basan en datos históricos (no pronóstico) para planificar actividades al aire libre. NASA dispone de décadas de datos globales (lluvia, viento, polvo, temperatura, nieve, nubosidad) y modelos que caracterizan condiciones típicas y extremos.",
-  objetivos:
-    "Dashboard para elegir ubicación y día del año; seleccionar variables (temperatura, precipitación, viento, etc.); mostrar medias/umbrales y probabilidad de superar límites; visualizaciones y export.",
-  consideraciones: [
-    "Exportar CSV/JSON con metadatos (unidades y fuentes).",
-    "Evitar duplicar métricas similares; priorizar variables útiles.",
-    "Visualizaciones: distribuciones, series de tiempo, promedios por área.",
-    "Usar servicios existentes para subsetting de datos.",
-  ],
+    "Presentamos una app que, con datos históricos de la NASA, estima la probabilidad de enfrentar condiciones climáticas ‘extremas’ en una ubicación y fecha dadas. Es una herramienta para planificar actividades al aire libre con contexto climatológico, no un pronóstico.",
 };
 
 export default function HomeIndex() {
-  const [active, setActive] = useState<NavbarTabKey>("join");
-
-  const onTabChangeAction = (key: NavbarTabKey) => {
-    setActive(key);
-    if (typeof window !== "undefined") {
-      const main = document.getElementById("page-main");
-      if (main) main.scrollTo({ top: 0, behavior: "smooth" });
-      else window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  const section = useMemo(() => {
-    switch (active) {
-      case "join":
-        return <InicioSection />;
-      case "resources":
-        return <RecursosUsadosSection />;
-      case "teams":
-        return <IntegrantesSection />;
-      case "details":
-        return <DemoSection />;
-      default:
-        return null;
-    }
-  }, [active]);
-
   return (
     <div className="w-full text-slate-900">
-      <Navbar active={active} onTabChangeAction={onTabChangeAction} />
-      <main id="page-main" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-        <Hero onTabChange={onTabChangeAction} />
+      <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+        <Hero />
+
+        {/* Tarjetas meta (arranque rápido de la presentación) */}
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
           <InfoCard title="Evento" value={meta.proyecto} subtitle={meta.reto} />
           <InfoCard title="Dificultad" value={meta.dificultad} />
           <InfoCard title="Temas" value={meta.temas.join(" • ")} subtitle="Habilidades clave del reto" />
         </div>
-        <div className="mt-10">{section}</div>
+
+        {/* Presentación del proyecto */}
+        <div className="mt-10 grid gap-6">
+          <Section title="1) Propósito">
+            <p>
+              Ayudar a personas y equipos a decidir <strong>cuándo y dónde</strong> realizar sus actividades al aire libre
+              (eventos, ferias, deportes, logística) con una <strong>señal basada en historia climática</strong>: qué tan
+              probable es que el día elegido sea inusualmente <em>caluroso, frío, ventoso o húmedo/lluvioso</em>.
+            </p>
+          </Section>
+
+          <Section title="2) ¿Qué construiremos? (visión del producto)">
+            <ul className="list-disc pl-5 space-y-1">
+              <li><strong>Selector</strong> de ubicación y fecha (día del año).</li>
+              <li><strong>Indicadores</strong> de probabilidad de exceder umbrales (calor, frío, viento, humedad/lluvia).</li>
+              <li><strong>Visualizaciones</strong> simples: distribución histórica y señal de “riesgo relativo”.</li>
+              <li><strong>Exportación</strong> de resultados (CSV/JSON) con unidades y metadatos.</li>
+            </ul>
+          </Section>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Section title="3) ¿Cómo funciona? (en palabras simples)">
+              <ol className="list-decimal pl-5 space-y-1">
+                <li>Tomamos <strong>históricos climáticos</strong> de la zona elegida.</li>
+                <li>Extraemos la <strong>distribución</strong> de cada variable (p.ej., temperatura máxima diaria).</li>
+                <li>Definimos <strong>umbrales</strong> “extremos” (p. ej., percentil 85 para calor).</li>
+                <li>Calculamos la <strong>probabilidad de excedencia</strong> para el día elegido.</li>
+                <li>Lo mostramos con <strong>gráficos e indicadores</strong> y permitimos <strong>descargar</strong> los datos.</li>
+              </ol>
+            </Section>
+
+            <Section title="4) Demo en 3 minutos (flujo)">
+              <ol className="list-decimal pl-5 space-y-1">
+                <li>Elegimos <strong>Ciudad</strong> y <strong>Fecha</strong>.</li>
+                <li>La app devuelve <strong>probabilidades</strong> (calor, frío, viento, humedad/lluvia).</li>
+                <li>Vemos <strong>gráficos</strong> de contexto (histograma/boxplot/serie).</li>
+                <li>Descargamos <strong>CSV/JSON</strong> con resultados y metadatos.</li>
+              </ol>
+            </Section>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Section title="5) Arquitectura (MVP)">
+              <ul className="list-disc pl-5 space-y-1">
+                <li><strong>Frontend:</strong> Next.js + Tailwind (UI responsiva, accesible).</li>
+                <li><strong>Capa de datos:</strong> servicios de <em>subsetting</em> para traer solo lo necesario.</li>
+                <li><strong>Lógica:</strong> cálculo de percentiles/umbrales y prob. de excedencia en el servidor o edge.</li>
+                <li><strong>Export:</strong> generador de CSV/JSON con unidades, fuente y período.</li>
+              </ul>
+            </Section>
+
+            <Section title="6) Entregables del MVP">
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Interfaz de selección (ubicación + fecha) y variables.</li>
+                <li>Indicadores de “riesgo” por variable y umbral.</li>
+                <li>Gráficos básicos (distribución + serie anual)</li>
+                <li>Descarga CSV/JSON con metadatos.</li>
+              </ul>
+            </Section>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Section title="7) Alcance y límites (transparencia)">
+              <ul className="list-disc pl-5 space-y-1">
+                <li><strong>No es pronóstico</strong>; usamos historia climática para <em>contexto</em>.</li>
+                <li>Umbrales y percentiles serán <strong>configurables</strong> y <strong>documentados</strong>.</li>
+                <li>Primera versión enfocada en <strong>pocas variables útiles</strong> para evitar ruido.</li>
+              </ul>
+            </Section>
+
+            <Section title="8) Próximos pasos">
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Integrar primera fuente histórica y definir <strong>umbrales</strong> por variable.</li>
+                <li>Validar con <strong>casos de uso reales</strong> (eventos, deporte, turismo).</li>
+                <li>Pulir <strong>UX</strong> y enriquecer <strong>visualizaciones</strong>.</li>
+              </ul>
+            </Section>
+          </div>
+        </div>
       </main>
+
       <footer className="border-t border-black/10">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 text-sm text-slate-600 flex flex-wrap items-center justify-between gap-2">
           <span>© {new Date().getFullYear()} NASA Space Apps (demo)</span>
@@ -82,19 +123,17 @@ export default function HomeIndex() {
   );
 }
 
-function Hero({ onTabChange }: { onTabChange: (k: NavbarTabKey) => void }) {
+function Hero() {
   return (
     <section className="relative overflow-hidden rounded-2xl border border-black/10 bg-white p-6 sm:p-8">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">¿Lloverá en mi evento?</h1>
-          <p className="mt-3 text-slate-700">{copy.resumen}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button onClick={() => onTabChange("join")} className="rounded-full bg-[#0B3D91] px-5 py-2.5 text-white text-sm font-medium hover:bg-[#0A3a85]">Inicio</button>
-            <button onClick={() => onTabChange("resources")} className="rounded-full border border-[#0B3D91]/30 px-5 py-2.5 text-sm font-medium hover:bg-[#0B3D91]/5">Recursos usados</button>
-            <button onClick={() => onTabChange("teams")} className="rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:bg-black/5">Integrantes</button>
-            <button onClick={() => onTabChange("details")} className="rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:bg-black/5">Demo</button>
-          </div>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+            ¿Lloverá en mi evento?
+          </h1>
+          <p className="mt-3 text-slate-700">
+            {copy.resumen}
+          </p>
         </div>
         <div aria-hidden className="w-full lg:h-48 h-40 rounded-xl">
           <div
@@ -126,96 +165,5 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <h2 className="text-lg font-bold tracking-tight">{title}</h2>
       <div className="mt-3 text-slate-700 leading-relaxed">{children}</div>
     </section>
-  );
-}
-
-function InicioSection() {
-  return (
-    <div className="grid gap-6 lg:grid-cols-3">
-      <Section title="Resumen">
-        <p>{copy.resumen}</p>
-      </Section>
-      <Section title="Objetivos">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Dashboard por ubicación y fecha.</li>
-          <li>Variables (temperatura, precipitación, viento, etc.).</li>
-          <li>Umbrales y probabilidades.</li>
-          <li>Gráficos/mapas y descarga de datos.</li>
-        </ul>
-      </Section>
-      <Section title="Checklist rápido">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Definir fuentes de datos NASA.</li>
-          <li>Elegir variables y umbrales clave.</li>
-          <li>Diseñar UI/UX mínima viable.</li>
-          <li>Implementar export CSV/JSON.</li>
-        </ul>
-      </Section>
-    </div>
-  );
-}
-
-function RecursosUsadosSection() {
-  return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <Section title="Fuentes de datos">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Observación de la Tierra (precipitación, viento, temperatura, etc.).</li>
-          <li>Modelos y climatologías de NASA para extremos y promedios.</li>
-          <li>Servicios de subsetting para recortes espaciales/temporales.</li>
-        </ul>
-      </Section>
-      <Section title="Stack de visualización">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Gráficos de distribución y series de tiempo.</li>
-          <li>Promedios por área e indicadores de umbral.</li>
-          <li>Exportación CSV/JSON con metadatos.</li>
-        </ul>
-      </Section>
-    </div>
-  );
-}
-
-function IntegrantesSection() {
-  return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <Section title="Equipo">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Datos</li>
-          <li>Frontend</li>
-          <li>Backend</li>
-          <li>Ciencia de Datos</li>
-          <li>PM</li>
-        </ul>
-      </Section>
-      <Section title="Estado del reto">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Ideación</li>
-          <li>Prototipo de UI</li>
-          <li>Ingesta de datos NASA</li>
-          <li>Visualizaciones y export</li>
-        </ul>
-      </Section>
-    </div>
-  );
-}
-
-function DemoSection() {
-  return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <Section title="Objetivo de la demo">
-        <p>
-          Mostrar el flujo principal: selección de ubicación/fecha → cálculo de probabilidades → visualización de indicadores y descarga de datos.
-        </p>
-      </Section>
-      <Section title="Alcance técnico sugerido">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Selector de ubicación: pin en mapa, texto o polígono.</li>
-          <li>Visual: distribución de probabilidades y serie temporal.</li>
-          <li>Export: CSV/JSON con unidades y metadatos.</li>
-          <li>Accesible y responsivo (mobile-first).</li>
-        </ul>
-      </Section>
-    </div>
   );
 }
