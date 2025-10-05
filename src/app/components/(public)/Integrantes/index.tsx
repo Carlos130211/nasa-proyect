@@ -19,63 +19,60 @@ const TEAM: Member[] = [
     name: "Carlos Silva Calderon",
     role: "Fronted",
     school: "USAT · Chiclayo, Perú",
-    photo: "/team/ana.jpg",
+    photo: "/Silva.webp",
     socials: {
       linkedin: "https://www.linkedin.com/in/silva-calderon-carlos-francisco-a9a296275",
-      instagram: "https://www.instagram.com/sc.carlos_13",
       github: "https://github.com/Carlos130211",
     },
   },
   {
     name: "Diego Sandoval Paredes",
-    role: "",
+    role: "Data Search",
     school: "USAT · Chiclayo, Perú",
-    photo: "/team/luis.jpg",
+    photo: "/Sandoval.webp",
     socials: {
-      linkedin: "",
-      github: "",
+      linkedin: "https://www.linkedin.com/in/diego-ismael-sandoval-paredes-874a95328",
+      github: "https://github.com/Diego-S4",
     },
   },
   {
     name: "Rodrigo Tocto Portocarrero",
-    role: "",
+    role: "Fronted & Apis",
     school: "USAT · Chiclayo, Perú",
-    photo: "/team/maria.jpg",
+    photo: "/Tocto.webp",
     socials: {
-      linkedin: "",
-      instagram: "",
-      github: "",
+      linkedin: "https://www.linkedin.com/in/rodrigo-jes%C3%BAs-tocto-portocarrero-77a5a21ab/",
+      github: "https://github.com/RodrigoToctoPortocarrero",
     },
   },
   {
     name: "Txiki Garaycochea Mendoza",
-    role: "Project Manager",
+    role: "Desarrollador de IA",
     school: "USAT · Chiclayo, Perú",
-    photo: "/team/jorge.jpg",
+    photo: "/Garaycochea.webp",
     socials: {
       linkedin: "",
-    },
-  },
-  {
-    name: "Daniel Saavedra ",
-    role: "Visualización de Datos",
-    school: "USAT · Chiclayo, Perú",
-    photo: "/team/camila.jpg",
-    socials: {
-      linkedin: "",
-      instagram: "",
       github: "",
     },
   },
   {
-    name: "Gabriel Flores",
-    role: "Integración & APIs",
+    name: "Daniel Saavedra Huayta",
+    role: "Desarrollador de IA",
     school: "USAT · Chiclayo, Perú",
-    photo: "/team/diego.jpg",
+    photo: "/Saavedra.webp",
     socials: {
-      linkedin: "",
-      instagram: "",
-      github: "",
+      linkedin: "https://www.linkedin.com/in/daniel-saavedra-937b592b2/",
+      github: "https://github.com/WhichGod360",
+    },
+  },
+  {
+    name: "Gabriel Flores Coronel",
+    role: "Data Search",
+    school: "USAT · Chiclayo, Perú",
+    photo: "/Flores.webp",
+    socials: {
+      linkedin: "https://www.linkedin.com/feed/?trk=onboarding-landing",
+      github: "https://github.com/gabrielangel283",
     },
   },
 ];
@@ -97,10 +94,9 @@ export default function Integrantes() {
         <section className="mt-10 rounded-2xl border border-black/10 bg-white p-6 sm:p-7">
           <h2 className="text-lg font-bold tracking-tight">Estado del reto</h2>
           <ul className="mt-3 list-disc pl-5 space-y-1 text-slate-700">
-            <li>Ideación</li>
-            <li>Prototipo de UI</li>
-            <li>Ingesta de datos NASA</li>
-            <li>Visualizaciones y export</li>
+            <li>Diseño Terminado</li>
+            <li>Conexion con Datos Realizada</li>
+            <li>Esta Demo es solo para Perú</li>
           </ul>
         </section>
       </main>

@@ -116,7 +116,7 @@ export default function HomeIndex() {
       <footer className="border-t border-black/10">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 text-sm text-slate-600 flex flex-wrap items-center justify-between gap-2">
           <span>© {new Date().getFullYear()} NASA Space Apps (demo)</span>
-          <a href="#" className="underline underline-offset-4 hover:no-underline">Código de conducta</a>
+          <span className="underline underline-offset-4 hover:no-underline">Educa Coders</span>
         </div>
       </footer>
     </div>

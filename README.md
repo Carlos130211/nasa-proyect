@@ -5,18 +5,13 @@ NASA Space Apps Challenge 2025
 Aplicación web que estima, con datos históricos de la NASA, la probabilidad de que en una ubicación y fecha determinadas se presenten condiciones muy calurosas, muy frías, muy ventosas, muy húmedas/lluviosas o muy incómodas.
 Está diseñada para ayudar a planificar actividades al aire libre de forma más informada y confiable.
 
-Stack
+Tecnologías: 
+-Next.js (App Router)
+-TypeScript
+-React
+-Tailwind CSS
+-Python
 
-Next.js
- (App Router)
-
-TypeScript
-
-React
-
-Tailwind CSS
-
-(Opcional) Recharts / D3.js / ECharts para visualización
 
 📂 Estructura del Proyecto
 src/
@@ -28,27 +23,20 @@ src/
             └─ index.tsx       # Página principal con secciones controladas por el Navbar
    └─ page.tsx                 # Punto de entrada que monta HomeIndex
 
-Paleta de Colores
+Paleta de Colores:
+-Azul NASA #0B3D91
+-Rojo NASA #FC3D21
+-Cielo #BBD5F0
+-Pizarra #0f172a
 
-Azul NASA #0B3D91
-
-Rojo NASA #FC3D21
-
-Cielo #BBD5F0
-
-Pizarra #0f172a
-
-Secciones
-
-Inicio: Resumen, objetivos y checklist rápido.
-
-Recursos usados: Fuentes de datos NASA y stack de visualización.
-
-Integrantes: Roles del equipo y estado del reto.
+Secciones:
+-Inicio: Resumen, objetivos y checklist rápido.
+-Recursos usados: Fuentes de datos NASA y stack de visualización.
+-Integrantes: Roles del equipo y estado del reto.
 
 Demo: Flujo técnico sugerido y alcance.
 
-🛠️ Instalación y Ejecución
+🛠️ Instalación y Ejecución:
 
 Instala las dependencias:
 
@@ -58,8 +46,7 @@ yarn
 # o
 pnpm install
 # o
-bun install
-
+run install
 
 Ejecuta el servidor de desarrollo:
 
@@ -69,7 +56,7 @@ yarn dev
 # o
 pnpm dev
 # o
-bun dev
+run dev
 
 
 Visita http://localhost:3000
@@ -108,8 +95,7 @@ Se muestran indicadores visuales y se permite la descarga de datos
 
 🌍 Deploy en Vercel
 
-La forma más sencilla de desplegar es con Vercel
-:
+La forma más sencilla de desplegar es con Vercel:
 
 Conecta el repositorio
 
