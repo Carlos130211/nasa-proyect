@@ -1,9 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type * as Leaflet from "leaflet";
 
 type LatLng = { lat: number; lng: number };
 type NominatimResult = { lat: string; lon: string; display_name: string };
+
+type PredictResult = {
+  Departamento?: string;
+  T2M_MAX?: number | string;
+  T2M_MIN?: number | string;
+  RH2M?: number | string;
+  WS10M?: number | string;
+  RADIACION_SOLAR?: number | string;
+  // otros campos posibles
+  [k: string]: unknown;
+};
 
 const DEFAULT_CENTER: LatLng = { lat: -12.0463, lng: -77.0427 };
 const FIXED_COUNTRY_CODE = "PE";
@@ -45,28 +57,29 @@ export default function Demo() {
   const [date, setDate] = useState<string>(() => new Date().toISOString().slice(0, 10));
 
   // Estados para predicción
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [result, setResult] = useState<PredictResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Leaflet refs
-  const leafletRef = useRef<any>(null);
-  const mapRef = useRef<any>(null);
-  const markerRef = useRef<any>(null);
+  // Leaflet refs tipadas
+  const leafletRef = useRef<null | typeof import("leaflet")>(null);
+  const mapRef = useRef<Leaflet.Map | null>(null);
+  const markerRef = useRef<Leaflet.Marker | null>(null);
   const mapElRef = useRef<HTMLDivElement | null>(null);
 
   // Inicializar mapa
   useEffect(() => {
     let cancelled = false;
+
     (async () => {
       if (typeof window === "undefined") return;
       if (!mapElRef.current || mapRef.current) return;
 
-      const Lmod = await import("leaflet");
-      const L = Lmod.default || Lmod;
+      const L: typeof import("leaflet") = await import("leaflet");
       if (cancelled) return;
 
       leafletRef.current = L;
+
       const markerIcon = L.icon({
         iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
         iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -87,7 +100,11 @@ export default function Demo() {
           'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       }).addTo(mapRef.current);
 
-      markerRef.current = L.marker([center.lat, center.lng], { draggable: true, icon: markerIcon }).addTo(mapRef.current);
+      markerRef.current = L.marker([center.lat, center.lng], {
+        draggable: true,
+        icon: markerIcon,
+      }).addTo(mapRef.current);
+
       markerRef.current.bindPopup(getPopupHtml(address, center.lat, center.lng, date));
 
       markerRef.current.on("dragend", () => {
@@ -106,6 +123,7 @@ export default function Demo() {
         markerRef.current = null;
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Actualizar popup si cambia algo
@@ -131,7 +149,7 @@ export default function Demo() {
     try {
       const resp = await fetch(url, { headers: { "Accept-Language": "es" } });
       const data = (await resp.json()) as NominatimResult[];
-      if (data?.length) {
+      if (Array.isArray(data) && data.length > 0) {
         const r = data[0];
         const lat = parseFloat(r.lat);
         const lng = parseFloat(r.lon);
@@ -150,7 +168,7 @@ export default function Demo() {
     }
   };
 
-  // 🔹 Botón: Predecir clima
+  // Botón: Predecir clima
   const handlePredict = async () => {
     if (!selectedDepartment || !center.lat || !center.lng || !date) {
       alert("⚠️ Por favor, selecciona el departamento, fecha y punto en el mapa.");
@@ -173,14 +191,20 @@ export default function Demo() {
         }),
       });
 
-      const data = await res.json();
-      console.log("📡 Respuesta API:", data);
-
-      if (!res.ok || !data.exito) {
-        throw new Error(data.error || "Error al obtener la predicción.");
+      const raw: unknown = await res.json();
+      if (!res.ok) {
+        const maybeErr = (raw as { error?: string })?.error ?? "Error al obtener la predicción.";
+        throw new Error(maybeErr);
       }
 
-      setResult(data.resultado || data.datos || data);
+      // Algunos backends devuelven {resultado:{...}} o {datos:{...}}
+      const payload = raw as Record<string, unknown>;
+      const normalized =
+        (payload.resultado as PredictResult | undefined) ??
+        (payload.datos as PredictResult | undefined) ??
+        (payload as PredictResult);
+
+      setResult(normalized);
     } catch (err) {
       console.error("❌ Error:", err);
       setError("❌ No se pudo obtener la predicción. Verifica los datos e intenta nuevamente.");
@@ -286,7 +310,7 @@ export default function Demo() {
   );
 }
 
-function buildNominatimUrl(query: string, countryCode?: string) {
+function buildNominatimUrl(query: string, countryCode?: string): string {
   const base = "https://nominatim.openstreetmap.org/search";
   const params = new URLSearchParams({
     format: "json",
@@ -298,7 +322,7 @@ function buildNominatimUrl(query: string, countryCode?: string) {
   return `${base}?${params.toString()}`;
 }
 
-function getPopupHtml(label: string, lat: number, lng: number, date: string) {
+function getPopupHtml(label: string, lat: number, lng: number, date: string): string {
   return `
     <div style="font-size: 12px; line-height: 1.3">
       <div style="font-weight: 600;">${escapeHtml(label)}</div>
@@ -312,7 +336,7 @@ function getPopupHtml(label: string, lat: number, lng: number, date: string) {
   `;
 }
 
-function escapeHtml(str: string) {
+function escapeHtml(str: string): string {
   return String(str)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")

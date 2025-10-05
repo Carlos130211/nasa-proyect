@@ -37,9 +37,8 @@ export default function HomeIndex() {
         <div className="mt-10 grid gap-6">
           <Section title="1) Propósito">
             <p>
-              Ayudar a personas y equipos a decidir <strong>cuándo y dónde</strong> realizar sus actividades al aire libre
-              (eventos, ferias, deportes, logística) con una <strong>señal basada en historia climática</strong>: qué tan
-              probable es que el día elegido sea inusualmente <em>caluroso, frío, ventoso o húmedo/lluvioso</em>.
+              Transformamos datos históricos de la NASA en una señal de probabilidad para ayudarte a planificar cuándo y dónde realizar actividades al aire libre (eventos, logística, agricultura, turismo). Ofrecemos datos históricos para una toma de decisiones proactiva y resiliente.
+              No es un pronóstico, es la probabilidad de que tu día sea inusualmente caluroso, frío, ventoso o lluvioso.
             </p>
           </Section>
 
@@ -57,7 +56,6 @@ export default function HomeIndex() {
               <ol className="list-decimal pl-5 space-y-1">
                 <li>Tomamos <strong>históricos climáticos</strong> de la zona elegida.</li>
                 <li>Extraemos la <strong>distribución</strong> de cada variable (p.ej., temperatura máxima diaria).</li>
-                <li>Definimos <strong>umbrales</strong> “extremos” (p. ej., percentil 85 para calor).</li>
                 <li>Calculamos la <strong>probabilidad de excedencia</strong> para el día elegido.</li>
                 <li>Lo mostramos con <strong>gráficos e indicadores</strong> y permitimos <strong>descargar</strong> los datos.</li>
               </ol>
@@ -67,7 +65,6 @@ export default function HomeIndex() {
               <ol className="list-decimal pl-5 space-y-1">
                 <li>Elegimos <strong>Ciudad</strong> y <strong>Fecha</strong>.</li>
                 <li>La app devuelve <strong>probabilidades</strong> (calor, frío, viento, humedad/lluvia).</li>
-                <li>Vemos <strong>gráficos</strong> de contexto (histograma/boxplot/serie).</li>
                 <li>Descargamos <strong>CSV/JSON</strong> con resultados y metadatos.</li>
               </ol>
             </Section>
@@ -79,7 +76,7 @@ export default function HomeIndex() {
                 <li><strong>Frontend:</strong> Next.js + Tailwind (UI responsiva, accesible).</li>
                 <li><strong>Capa de datos:</strong> servicios de <em>subsetting</em> para traer solo lo necesario.</li>
                 <li><strong>Lógica:</strong> cálculo de percentiles/umbrales y prob. de excedencia en el servidor o edge.</li>
-                <li><strong>Export:</strong> generador de CSV/JSON con unidades, fuente y período.</li>
+                <li><strong>Export:</strong> generador de CSV con unidades, fuente y período.</li>
               </ul>
             </Section>
 
@@ -88,7 +85,7 @@ export default function HomeIndex() {
                 <li>Interfaz de selección (ubicación + fecha) y variables.</li>
                 <li>Indicadores de “riesgo” por variable y umbral.</li>
                 <li>Gráficos básicos (distribución + serie anual)</li>
-                <li>Descarga CSV/JSON con metadatos.</li>
+                <li>Descarga CSV con metadatos.</li>
               </ul>
             </Section>
           </div>
