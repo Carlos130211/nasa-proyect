@@ -47,7 +47,7 @@ export default function HomeIndex() {
               <li><strong>Selector</strong> de ubicación y fecha (día del año).</li>
               <li><strong>Indicadores</strong> de probabilidad de exceder umbrales (calor, frío, viento, humedad/lluvia).</li>
               <li><strong>Visualizaciones</strong> simples: distribución histórica y señal de “riesgo relativo”.</li>
-              <li><strong>Exportación</strong> de resultados (CSV/JSON) con unidades y metadatos.</li>
+              <li><strong>Exportación</strong> de resultados (CSV) con unidades y metadatos.</li>
             </ul>
           </Section>
 
@@ -65,7 +65,7 @@ export default function HomeIndex() {
               <ol className="list-decimal pl-5 space-y-1">
                 <li>Elegimos <strong>Ciudad</strong> y <strong>Fecha</strong>.</li>
                 <li>La app devuelve <strong>probabilidades</strong> (calor, frío, viento, humedad/lluvia).</li>
-                <li>Descargamos <strong>CSV/JSON</strong> con resultados y metadatos.</li>
+                <li>Descargamos <strong>CSV</strong> con resultados y metadatos.</li>
               </ol>
             </Section>
           </div>
@@ -90,16 +90,8 @@ export default function HomeIndex() {
             </Section>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-2">
-            <Section title="7) Alcance y límites (transparencia)">
-              <ul className="list-disc pl-5 space-y-1">
-                <li><strong>No es pronóstico</strong>; usamos historia climática para <em>contexto</em>.</li>
-                <li>Umbrales y percentiles serán <strong>configurables</strong> y <strong>documentados</strong>.</li>
-                <li>Primera versión enfocada en <strong>pocas variables útiles</strong> para evitar ruido.</li>
-              </ul>
-            </Section>
-
-            <Section title="8) Próximos pasos">
+          <div className="grid gap-6 lg:grid-cols-1">
+            <Section title="7) Próximos pasos">
               <ul className="list-disc pl-5 space-y-1">
                 <li>Integrar primera fuente histórica y definir <strong>umbrales</strong> por variable.</li>
                 <li>Validar con <strong>casos de uso reales</strong> (eventos, deporte, turismo).</li>
