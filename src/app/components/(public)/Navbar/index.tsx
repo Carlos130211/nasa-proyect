@@ -22,8 +22,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-white/80 backdrop-blur">
       <nav className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
-          <span className="font-bold text-lg tracking-tight">
-            🚀 IMIP
+          <span className="font-bold flex items-center space-x-2 text-lg tracking-tight">
+            <img src="/Icon2.png" className="h-10 w-10 rounded-lg"/> <span className="text-xl font-bold">URA DATA</span>
           </span>
 
           <button

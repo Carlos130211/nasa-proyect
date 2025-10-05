@@ -278,7 +278,7 @@ export default function Demo() {
         {/* Mapa */}
         <section className="lg:col-span-2">
           <div className="w-full h-[500px] border border-gray-300 rounded-lg shadow-xl overflow-hidden">
-            <div ref={mapElRef} className="w-full h-full" />
+            <div ref={mapElRef} className="w-full h-full z-10" />
           </div>
         </section>
       </div>

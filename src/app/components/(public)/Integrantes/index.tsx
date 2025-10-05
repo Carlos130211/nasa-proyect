@@ -52,7 +52,7 @@ const TEAM: Member[] = [
     photo: "/Garaycochea.webp",
     socials: {
       linkedin: "",
-      github: "",
+      github: "https://github.com/XavierGM06",
     },
   },
   {

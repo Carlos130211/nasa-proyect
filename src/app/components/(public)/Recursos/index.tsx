@@ -7,17 +7,18 @@ type Resource = {
 };
 
 const dataSources: Resource[] = [
-  // Ejemplos — reemplaza por tus recursos reales
   { name: "NASA GPM (Precipitación)", url: "https://gpm.nasa.gov/", note: "Lluvia histórica" },
   { name: "MERRA-2 (Reanálisis)", url: "https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/", note: "Viento/temperatura" },
   { name: "POWER (Climatología)", url: "https://power.larc.nasa.gov/", note: "Series para energía/meteorología" },
 ];
 
-const vizStack: Resource[] = [
-  { name: "Recharts", url: "https://recharts.org/", note: "Gráficos React" },
-  { name: "D3.js", url: "https://d3js.org/", note: "Visualizaciones personalizadas" },
-  { name: "ECharts", url: "https://echarts.apache.org/", note: "Charts interactivos" },
+const techStack: Resource[] = [
+  { name: "Next.js (App Router)", url: "https://nextjs.org/", note: "Framework React para SSR/ISR" },
+  { name: "Tailwind CSS", url: "https://tailwindcss.com/", note: "Estilos utilitarios" },
+  { name: "Leaflet", url: "https://leafletjs.com/", note: "Mapa interactivo" },
+  { name: "React Leaflet", url: "https://react-leaflet.js.org/", note: "Bindings de Leaflet para React" },
 ];
+
 
 export default function Recursos() {
   return (
@@ -37,13 +38,14 @@ export default function Recursos() {
         </section>
 
         <section className="mt-10">
-          <h2 className="text-lg font-bold tracking-tight">Stack de visualización</h2>
+          <h2 className="text-lg font-bold tracking-tight">Tecnologías utilizadas</h2>
           <div className="mt-4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {vizStack.map((r) => (
+            {techStack.map((r) => (
               <ResourceCard key={r.url} {...r} />
             ))}
           </div>
         </section>
+
       </main>
     </div>
   );
