@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "IMIP",
+  title: "QORI TECH",
   description: "INTELLIGENT METEOROLOGICAL IMAGE PROCESSING.",
 };
 

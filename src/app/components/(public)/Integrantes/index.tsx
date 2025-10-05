@@ -17,7 +17,7 @@ type Member = {
 const TEAM: Member[] = [
   {
     name: "Carlos Silva Calderon",
-    role: "Fronted",
+    role: "CEO and Fronted",
     school: "USAT · Chiclayo, Perú",
     photo: "/Silva.webp",
     socials: {
@@ -37,7 +37,7 @@ const TEAM: Member[] = [
   },
   {
     name: "Rodrigo Tocto Portocarrero",
-    role: "Fronted & Apis",
+    role: "Apis Management",
     school: "USAT · Chiclayo, Perú",
     photo: "/Tocto.webp",
     socials: {
@@ -47,7 +47,7 @@ const TEAM: Member[] = [
   },
   {
     name: "Txiki Garaycochea Mendoza",
-    role: "Desarrollador de IA",
+    role: "AI Developer",
     school: "USAT · Chiclayo, Perú",
     photo: "/Garaycochea.webp",
     socials: {
@@ -57,7 +57,7 @@ const TEAM: Member[] = [
   },
   {
     name: "Daniel Saavedra Huayta",
-    role: "Desarrollador de IA",
+    role: "AI Tester",
     school: "USAT · Chiclayo, Perú",
     photo: "/Saavedra.webp",
     socials: {
@@ -67,7 +67,7 @@ const TEAM: Member[] = [
   },
   {
     name: "Gabriel Flores Coronel",
-    role: "Data Search",
+    role: "Data Analyst",
     school: "USAT · Chiclayo, Perú",
     photo: "/Flores.webp",
     socials: {
