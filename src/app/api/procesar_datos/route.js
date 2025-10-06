@@ -1,26 +1,37 @@
-// 📄 src/app/api/procesar_datos/route.js
 import { NextResponse } from "next/server";
-import { descargarDatos } from "../descargar_datos/descargar_datos";
-import { limpiarDatos } from "../limpiar_datos/limpiar_datos";
+import path from "path";
+import { exec } from "child_process";
+
+// ✅ Ejecuta directamente los scripts del backend
+const RUTA_DESCARGAR = path.resolve("src/scripts/nasa_downloader.js");
+const RUTA_LIMPIAR = path.resolve("src/scripts/limpiar_data_final.js");
 
 export async function GET() {
-  try {
-    console.log("🔹 Iniciando descarga de datos...");
-    const resultadoDescarga = await descargarDatos(); // función importada
+  console.log("🚀 Ejecutando proceso combinado: descargar + limpiar");
 
-    console.log("🔹 Limpiando datos...");
-    const resultadoLimpieza = await limpiarDatos(); // función importada
+  try {
+    await new Promise((resolve, reject) => {
+      exec(`node "${RUTA_DESCARGAR}"`, (error, stdout, stderr) => {
+        if (error) return reject(stderr || error.message);
+        console.log(stdout);
+        resolve();
+      });
+    });
+
+    await new Promise((resolve, reject) => {
+      exec(`node "${RUTA_LIMPIAR}"`, (error, stdout, stderr) => {
+        if (error) return reject(stderr || error.message);
+        console.log(stdout);
+        resolve();
+      });
+    });
 
     return NextResponse.json({
-      message: "✅ Datos descargados y limpiados correctamente.",
-      descarga: resultadoDescarga,
-      limpieza: resultadoLimpieza,
+      ok: true,
+      mensaje: "Datos descargados y limpiados correctamente 🚀",
     });
   } catch (error) {
-    console.error("❌ Error al procesar datos:", error);
-    return NextResponse.json(
-      { error: "Error al procesar datos: " + error.message },
-      { status: 500 }
-    );
+    console.error("❌ Error en procesamiento:", error);
+    return NextResponse.json({ ok: false, error: error.toString() }, { status: 500 });
   }
 }
