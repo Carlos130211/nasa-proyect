@@ -215,9 +215,23 @@ export default function Demo() {
 
   return (
     <main className="container mx-auto p-4 md:p-8 min-h-screen bg-gray-50">
-      <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
-        🗺️ Mapa de Departamentos del Perú
-      </h1>
+      
+      <div className="flex items-center justify-center mb-8 gap-4">
+        <h1 className="text-3xl font-extrabold text-gray-800">
+          🗺️ Mapa de Departamentos del Perú
+        </h1>
+        <button
+          onClick={async () => {
+            alert("⏳ Iniciando descarga y limpieza...");
+            await fetch("/api/descargar_datos");
+            await fetch("/api/limpiar_datos");
+            alert("🎉 Datos descargados y limpiados correctamente.");
+          }}
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition"
+        >
+          ⬇️ Descargar y limpiar datos
+        </button>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Panel lateral */}

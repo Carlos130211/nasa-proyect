@@ -9,8 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "csv-parser": "^3.2.0",
+    "fast-csv": "^5.0.5",
     "leaflet": "^1.9.4",
     "next": "15.5.4",
+    "node-fetch": "^3.3.2",
     "papaparse": "^5.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
